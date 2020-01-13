@@ -13,12 +13,38 @@ class SensorTable extends React.Component {
             temp: '56.4',
             humidity: '33.1',
             active: true
-          }]
+          },
+          {
+            id: '2',
+            name: 'Humidity002DEV',
+            device: 'Humidity',
+            temp: '',
+            humidity: '45.6',
+            active: true
+          }
+        ],
+          filterName: '1',
+          sortBy: ''
         };
     }
 
     componentDidMount() {
 
+    }
+
+    filterSort = () =>
+    {
+
+      if(this.state.filterName !== '')
+      {
+        const filteredSensors = this.state.sensors.filter(sensor => sensor.name.toLowerCase().includes(this.state.filterName.toLowerCase()));
+        console.log(filteredSensors);
+        return filteredSensors;
+      }
+      else {
+        return this.state.sensors;
+      }
+      
     }
   
     toggleSensor = (e) => {
@@ -59,7 +85,7 @@ class SensorTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-            {this.state.sensors.map((sensor) => {
+            {this.filterSort().map((sensor) => {
               return (
                   <SensorCard key={sensor.id} sensor={sensor} toggleSensor={this.toggleSensor}/>
               );
