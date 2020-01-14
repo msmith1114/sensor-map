@@ -15,7 +15,7 @@ class SensorTable extends React.Component {
           device: "Temp",
           temp: "56.4",
           humidity: "33.1",
-          active: true
+          active: false
         },
         {
           id: "2",
@@ -37,16 +37,16 @@ class SensorTable extends React.Component {
 
   filterSort = () => {
     //Check for filter, then sort
+    const sortVal = this.state.sortBy;
     if (this.state.filterName !== "") {
       const filteredSensors = this.state.sensors.filter(sensor =>
         sensor.name.toLowerCase().includes(this.state.filterName.toLowerCase())
       );
-      console.log(filteredSensors);
       return filteredSensors.sort(function(a, b) {
-        if(a.name < b.name) {
+        if(a[sortVal] < b[sortVal]) {
           return -1;
         }
-        if(a.name > b.name) {
+        if(a[sortVal] > b[sortVal]) {
           return 1;
         }
         else {
@@ -57,10 +57,10 @@ class SensorTable extends React.Component {
     //If no filter exists, just sort
     else {
       return this.state.sensors.sort(function(a, b) {
-        if(a.name < b.name) {
+        if(a[sortVal] < b[sortVal]) {
           return -1;
         }
-        if(a.name > b.name) {
+        if(a[sortVal] > b[sortVal]) {
           return 1;
         }
         else {
