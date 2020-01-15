@@ -3,6 +3,7 @@ import SensorCard from "./SensorCard";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import '../Styles/Components/_SensorTable.css'
 
 class SensorTable extends React.Component {
   constructor(props) {
@@ -104,6 +105,7 @@ class SensorTable extends React.Component {
     console.log(this.state);
     return (
       <div>
+        <div className="filterDiv">
         <Form>
           <Form.Row>
             <Col>
@@ -120,6 +122,7 @@ class SensorTable extends React.Component {
             </Col>
           </Form.Row>
         </Form>
+        </div>
         <Table striped bordered hover>
           <thead>
             <tr>

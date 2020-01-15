@@ -1,9 +1,15 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState } from "react";
+import SensorModalForm from './SensorModalForm'
 import { Link } from "react-router-dom";
-
 import Button from "react-bootstrap/Button";
 
+
 const SensorCard = ({ props, sensor, toggleSensor }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   if (sensor) {
     const { id, name, device, temp, humidity, active } = sensor;
     return (
@@ -20,10 +26,12 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
               pathname: `/devices/${id}`,
               state: { sensor: sensor }
             }}
+            className="btn btn-info btn-sm"
           >
-          View
+            View
           </Link>
-          <Button variant="info" size="sm">
+          <SensorModalForm device={device} name={name} handleClose={handleClose} show={show}/>
+          <Button variant="info" size="sm" onClick={handleShow}>
             Edit
           </Button>
           <Button variant="info" size="sm" data-id={id} onClick={toggleSensor}>
