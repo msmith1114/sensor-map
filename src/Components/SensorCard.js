@@ -10,6 +10,10 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleSubmit = e => {
+    console.log("Submitted")
+    //do stuff here to update values
+  }
   if (sensor) {
     const { id, name, device, temp, humidity, active } = sensor;
     return (
@@ -30,7 +34,7 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
           >
             View
           </Link>
-          <SensorModalForm device={device} name={name} handleClose={handleClose} show={show}/>
+          <SensorModalForm device={device} name={name} handleClose={handleClose} handleSubmit={handleSubmit} show={show}/>
           <Button variant="info" size="sm" onClick={handleShow}>
             Edit
           </Button>
