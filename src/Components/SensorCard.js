@@ -10,9 +10,10 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleSubmit = e => {
+  const handleSubmit = (name,device)=> {
     console.log("Submitted")
-    //do stuff here to update values
+    console.log(`${name} and ${device}`)
+    //do stuff here to update values via POST request
   }
   if (sensor) {
     const { id, name, device, temp, humidity, active } = sensor;

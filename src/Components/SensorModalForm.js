@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const SensorModalForm = props => {
-  const handleDeviceType = e => {
-    console.log("hi");
-    console.log(e.target.value);
-  };
+  const [deviceName, setName] = useState(props.name);
+  const [deviceType, setType] = useState(props.device);
 
-  const handleDeviceName = e => {
-    console.log("hi");
-    console.log(e.target.value);
-  };
+  const handleSubmit = e => {
+    props.handleSubmit(deviceName, deviceType);
+    console.log(e.target)
+  }
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
@@ -20,13 +18,13 @@ const SensorModalForm = props => {
         <Modal.Title>Edit Form</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={props.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Device Name</Form.Label>
             <Form.Control
               type="text"
-              value={props.name}
-              onChange={handleDeviceName}
+              value={deviceName}
+              onChange={e => setName(e.target.value)}
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -36,8 +34,8 @@ const SensorModalForm = props => {
             <Form.Label>Device Type</Form.Label>
             <Form.Control
               type="text"
-              value={props.device}
-              onChange={handleDeviceType}
+              value={deviceType}
+              onChange={e => setType(e.target.value)}
             />
           </Form.Group>
           <Button variant="primary" type="submit">
