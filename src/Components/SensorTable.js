@@ -20,15 +20,23 @@ class SensorTable extends React.Component {
         },
         {
           id: "2",
-          name: "Humidity002DEV",
+          name: "Humidity001DEV",
           device: "Humidity",
           temp: "",
+          humidity: "45.6",
+          active: true
+        },
+        {
+          id: "3",
+          name: "Temp002DEV",
+          device: "Temp",
+          temp: "78.2",
           humidity: "45.6",
           active: true
         }
       ],
       filterName: "",
-      sortBy: "name"
+      sortBy: "id"
     };
   }
 

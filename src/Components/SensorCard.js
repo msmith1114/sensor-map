@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
+import axios from "axios";
 import SensorModalForm from './SensorModalForm'
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -8,12 +9,30 @@ import Button from "react-bootstrap/Button";
 const SensorCard = ({ props, sensor, toggleSensor }) => {
   const [show, setShow] = useState(false);
 
+  const handleSave = (e) => {
+    e.preventDefault();
+    setShow(false)
+    console.log(e.target.formBasicName.value)
+    console.log(e.target.formBasicDevice.value)
+    console.log("Submitted")
+    axios({
+      method: 'put',
+      url: 'https://jsonplaceholder.typicode.com/posts/1',
+      data: {
+          id: 1,
+          title: 'foo',
+          body: 'bar',
+          userId: 1
+        }
+    })
+    .then(function (response) {
+      console.log(response.data);
+      console.log(response.status);
+    });
+  }
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleSubmit = e => {
-    console.log("Submitted")
-    //do stuff here to update values
-  }
+
   if (sensor) {
     const { id, name, device, temp, humidity, active } = sensor;
     return (
@@ -34,7 +53,7 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
           >
             View
           </Link>
-          <SensorModalForm device={device} name={name} handleClose={handleClose} handleSubmit={handleSubmit} show={show}/>
+          <SensorModalForm device={device} name={name} handleClose={handleClose} handleSave={handleSave} show={show}/>
           <Button variant="info" size="sm" onClick={handleShow}>
             Edit
           </Button>

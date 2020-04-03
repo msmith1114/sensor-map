@@ -1,18 +1,13 @@
 import React from "react";
+import { useState } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const SensorModalForm = props => {
-  const handleDeviceType = e => {
-    console.log("hi");
-    console.log(e.target.value);
-  };
-
-  const handleDeviceName = e => {
-    console.log("hi");
-    console.log(e.target.value);
-  };
+  const [name, setName] = useState(props.name);
+  const [device, setDevice] = useState(props.device);
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
@@ -20,13 +15,13 @@ const SensorModalForm = props => {
         <Modal.Title>Edit Form</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={props.handleSubmit}>
+        <Form onSubmit={props.handleSave}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Device Name</Form.Label>
             <Form.Control
               type="text"
-              value={props.name}
-              onChange={handleDeviceName}
+              value={name}
+              onChange={e => setName(e.target.value)}
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -36,23 +31,19 @@ const SensorModalForm = props => {
             <Form.Label>Device Type</Form.Label>
             <Form.Control
               type="text"
-              value={props.device}
-              onChange={handleDeviceType}
+              value={device}
+              onChange={e => setDevice(e.target.value)}
             />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <Button variant="secondary" onClick={props.handleClose}>
+            Close
+          </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={props.handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={props.handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+      <Modal.Footer>text</Modal.Footer>
     </Modal>
   );
 };
