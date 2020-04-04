@@ -9,11 +9,11 @@ import Button from "react-bootstrap/Button";
 const SensorCard = ({ props, sensor, toggleSensor }) => {
   const [show, setShow] = useState(false);
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  const handleSave = (e, name, device) => {
+    e.preventDefault()
     setShow(false)
-    console.log(e.target.formBasicName.value)
-    console.log(e.target.formBasicDevice.value)
+    console.log(name)
+    console.log(device)
     console.log("Submitted")
     axios({
       method: 'put',

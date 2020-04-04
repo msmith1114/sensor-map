@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -15,7 +14,7 @@ const SensorModalForm = props => {
         <Modal.Title>Edit Form</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={props.handleSave}>
+        <Form onSubmit={(e) => props.handleSave(e, name, device)}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Device Name</Form.Label>
             <Form.Control

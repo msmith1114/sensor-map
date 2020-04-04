@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 const SensorView = props => {
