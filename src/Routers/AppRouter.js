@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "../Components/NavBar";
-import SensorTable from '../Components/SensorTable';
+import SensorContainer from '../Components/SensorContainer';
 import SensorView from '../Components/SensorView';
 
 const AppRouter = () => (
@@ -17,7 +17,7 @@ const AppRouter = () => (
         </Route>
         <Route path="/devices/:id" component={SensorView}/>
         <Route path="/" exact={true}>
-          <SensorTable />
+          <SensorContainer />
         </Route>
       </Switch>
     </div>
