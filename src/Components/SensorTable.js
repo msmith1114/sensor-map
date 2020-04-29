@@ -1,75 +1,79 @@
 import React from "react";
-import {
-  useTable,
-  useGroupBy,
-  useFilters,
-  useSortBy,
-  useExpanded,
-  usePagination,
-} from "react-table";
-import "../Styles/Components/_SensorTable.css";
+import { Link } from "react-router-dom";
+import { Table } from "antd";
+import SensorView from "./SensorView";
 
-function SensorTable({ columns, data }) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+const SensorTable = (props) => {
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      render: (text) => <strong>{text}</strong>,
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.id - b.id,
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      sorter: (a, b) => {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      },
+    },
+    {
+      title: "Serial Number",
+      dataIndex: "serialNum",
+      sorter: (a, b) => {
+        var serialNumA = a.serialNum.toUpperCase(); // ignore upper and lowercase
+        var serialNumB = b.serialNum.toUpperCase(); // ignore upper and lowercase
+        if (serialNumA < serialNumB) {
+          return -1;
+        }
+        if (serialNumA > serialNumB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      },
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      sorter: (a, b) => a.status - b.status,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <span>
+          <a style={{ marginRight: 16 }}>View {record.name}</a>
+          <Link
+          to={{
+            pathname: `/devices/${record.id}`,
+            state: { sensor: record }
+          }}
+        >
+        View
+        </Link>
+          <a>Delete</a>
+        </span>
+      ),
+    },
+  ];
 
-  // Render the UI for your table
   return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-      <thead>
-        {console.log(headerGroups)}
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-                style={{
-                  borderBottom: "solid 3px red",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {column.render("Header")}
-                {/* Add a sort direction indicator */}
-                <span>
-                  {column.isSorted ? (column.isSortedDesc ? "⬇️" : "⬆️") : ""}
-                </span>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                      background: "papayawhip",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      <Table columns={columns} dataSource={props.dataSource} />
+    </div>
   );
-}
+};
 
 export default SensorTable;

@@ -1,9 +1,7 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import axios from "axios";
-import SensorModalForm from './SensorModalForm'
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 
 
 const SensorCard = ({ props, sensor, toggleSensor }) => {
@@ -53,7 +51,6 @@ const SensorCard = ({ props, sensor, toggleSensor }) => {
           >
             View
           </Link>
-          <SensorModalForm device={device} name={name} handleClose={handleClose} handleSave={handleSave} show={show}/>
           <Button variant="info" size="sm" onClick={handleShow}>
             Edit
           </Button>

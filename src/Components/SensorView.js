@@ -10,26 +10,21 @@ const SensorView = props => {
   const {
     id,
     name,
-    device,
+    serialNum,
     temp,
     humidity,
-    active
+    status
   } = props.location.state.sensor;
   return (
     <div>
-      Hello
       <br />
       {id}
       <br />
       {name}
       <br />
-      {device}
+      {serialNum}
       <br />
-      {temp}
-      <br />
-      {humidity}
-      <br />
-      {active}
+      {status}
       {console.log(props.location.state)}
       <br />
       <LineChart width={600} height={300} data={data}>
