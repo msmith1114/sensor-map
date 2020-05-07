@@ -71,7 +71,14 @@ const SensorTable = (props) => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={props.dataSource} />
+      <Table 
+        columns={columns} 
+        dataSource={props.dataSource} 
+        expandable={{
+            expandedRowRender: record => <p style={{ margin: 0 }}>{record.serialNum}</p>,
+            rowExpandable: record => record.name !== 'Not Expandable',
+        }} 
+        />
     </div>
   );
 };
