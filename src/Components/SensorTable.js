@@ -54,16 +54,14 @@ const SensorTable = (props) => {
       key: "action",
       render: (text, record) => (
         <span>
-          <a style={{ marginRight: 16 }}>View {record.name}</a>
           <Link
           to={{
             pathname: `/devices/${record.id}`,
             state: { sensor: record }
           }}
         >
-        View
+          View
         </Link>
-          <a>Delete</a>
         </span>
       ),
     },
@@ -75,7 +73,7 @@ const SensorTable = (props) => {
         columns={columns} 
         dataSource={props.dataSource} 
         expandable={{
-            expandedRowRender: record => <p style={{ margin: 0 }}>{record.serialNum}</p>,
+            expandedRowRender: record => <p style={{ margin: 0 }}>hello There! {record.serialNum}</p>,
             rowExpandable: record => record.name !== 'Not Expandable',
         }} 
         />
