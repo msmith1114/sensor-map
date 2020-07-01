@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
-import SensorView from "./SensorView";
 
 const SensorTable = (props) => {
   const columns = [
@@ -15,6 +14,13 @@ const SensorTable = (props) => {
     {
       title: "Name",
       dataIndex: "name",
+      render: (text, record) => (
+        <span>
+          {record.name}
+          hi
+          {text}
+        </span>
+      ),
       sorter: (a, b) => {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
         var nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -55,13 +61,13 @@ const SensorTable = (props) => {
       render: (text, record) => (
         <span>
           <Link
-          to={{
-            pathname: `/devices/${record.id}`,
-            state: { sensor: record }
-          }}
-        >
-          View
-        </Link>
+            to={{
+              pathname: `/devices/${record.id}`,
+              state: { sensor: record },
+            }}
+          >
+            View
+          </Link>
         </span>
       ),
     },
@@ -69,14 +75,16 @@ const SensorTable = (props) => {
 
   return (
     <div>
-      <Table 
-        columns={columns} 
-        dataSource={props.dataSource} 
+      <Table
+        columns={columns}
+        dataSource={props.dataSource}
         expandable={{
-            expandedRowRender: record => <p style={{ margin: 0 }}>hello There! {record.serialNum}</p>,
-            rowExpandable: record => record.name !== 'Not Expandable',
-        }} 
-        />
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>hello There! {record.serialNum}</p>
+          ),
+          rowExpandable: (record) => record.name !== "Not Expandable",
+        }}
+      />
     </div>
   );
 };

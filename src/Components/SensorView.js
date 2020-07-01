@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import MapContainer from './MapContainer';
 
 const SensorView = (props) => {
   const [data, setData] = useState([]);
+  
 
   const {
     id,
     name,
     serialNum,
-    temp,
-    humidity,
     status,
+    longitude,
+    latitude
   } = props.location.state.sensor;
 
   useEffect(() => {
@@ -45,6 +47,10 @@ const SensorView = (props) => {
       {serialNum}
       <br />
       {status}
+      <br />
+      {longitude}
+      <br />
+      {latitude}
       {console.log(props.location.state)}
       <br />
       <LineChart width={1200} height={600} data={data} margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>

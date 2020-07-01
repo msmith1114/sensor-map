@@ -24,6 +24,8 @@ const Dashboard = () => {
           name: sensor.attributes["name"],
           serialNum: sensor.attributes["serial-number"],
           status: sensor.attributes["device-status"],
+          latitude: sensor.attributes.latitude,
+          longitude: sensor.attributes.longitude
         }));
         setData(mappedJSON);
       })
