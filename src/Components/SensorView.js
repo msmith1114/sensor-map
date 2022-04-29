@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
-import MapContainer from './MapContainer';
 
 const SensorView = (props) => {
   const [data, setData] = useState([]);
